@@ -1,0 +1,20 @@
+<div id="container">
+	<!--  if statement for validation error message -->
+	<% if @errors %>
+		<div id="error-msg">
+			<h3 class="heading-error">We couldn't process your product registration!</h3>
+			<% @errors.each do |error| %>
+				<p class="error-msg"><%= error %></p>
+			<% end %>
+		</div>
+	<% end %>
+	<h1>Edit Your Product</h1>
+	<%= form_for @product, html: {method: "patch"} do |f| %>
+		<%= f.select(:category_id, options_for_select([['Electronics', 1], ['Household', 2], ['Gardening', 3], ['Automotive', 4], ['Ninjas', 5]], @product.category_id)) %>
+		<%= f.text_field :name %>
+		<%= f.text_field :pricing %>
+		<%= f.text_area :description %>
+		<%= f.submit "Update Product Info!" %>
+	<% end %>
+	<p class="link"><a href="<%= product_path %>">Show</a> | <a href="<%= root_path %>">Back</a><p>
+</div>

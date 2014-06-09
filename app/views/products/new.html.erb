@@ -1,0 +1,20 @@
+<div id="container">
+	<!--  if statement for validation error message -->
+	<% if @errors %>
+		<div id="error-msg">
+			<h3 class="heading-error">We couldn't process your product registration!</h3>
+			<% @errors.each do |error| %>
+				<p class="error-msg"><%= error %></p>
+			<% end %>
+		</div>
+	<% end %>
+	<h1>Create a New Product</h1>
+	<%= form_for(@product) do |f| %>
+		<%= f.select(:category, options_for_select([['Electronics', 1], ['Household', 2], ['Gardening', 3], ['Automotive', 4], ['Ninjas', 5]])) %>
+		<%= f.text_field :name, :placeholder => 'Enter product name' %>
+		<%= f.text_field :pricing, :placeholder => 'Enter product price' %>
+		<%= f.text_area :description, :placeholder => 'Enter product description' %>
+		<%= f.submit "Create Product!" %>
+	<% end %>
+	<p class="link"><a href="<%= root_path %>">Back</a><p>
+</div>

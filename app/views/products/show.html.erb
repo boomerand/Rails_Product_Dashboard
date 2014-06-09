@@ -1,0 +1,29 @@
+<div id="container">
+	<h1>Product Information</h1>
+	<div class="product-info" id="product-info-labels">	
+		<h3>Name:</h3>
+		<h3>Price:</h3>
+		<h3>Category:</h3>
+		<h3>Description:</h3>
+	</div>
+	<div class="product-info" id="product-info">	
+		<h3><%= @product.name %></h3>
+		<h3><%= @product.pricing %></h3>
+		<h3><%= @product.category.name %></h3>
+		<h3><%= @product.description %></h3>
+	</div>
+	<p class="link"><a href="<%= edit_product_path %>">Edit</a> | <a href="<%= root_path %>">Back</a><p>
+
+	<h2>Enter comment:</h2>
+
+	<%= form_for(@comment) do |f| %>
+		<%= f.hidden_field :product_id, :value => @product.id %> 
+		<%= f.text_area :comment, :placeholder => 'Enter comment' %>
+		<%= f.submit "Submit Comment" %>
+	<% end %>
+
+	<h4>Comments on this product:</h4>
+	<% @comments.each do |comment| %>
+		<p class="comment"><%= comment.comment %> <span>- <%= comment.created_at.strftime("%m/%d/%Y") %></span></p>
+	<% end %>
+</div>

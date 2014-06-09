@@ -1,0 +1,38 @@
+<div id="container">
+	<!-- New product success message goes here -->
+	<% if flash[:notice] %>
+		<div id="success-msg">
+			<h3 class="success"><%= flash[:notice] %></h3>
+		</div>
+	<% end %>
+	<h1>Current Product List</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Price</th>
+				<th>Category</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @products.each do |product| %>
+			<tr>
+				<td><%= product.name %></td>
+				<td><%= product.description %></td>
+				<td width="70">$<%= product.pricing %></td>
+				<td><%= product.category.name %></td>
+				<td width="175" class="utilities">
+					<ul>
+						<li><a href="<%= product_path(product) %>">Show</a></li>
+						<li><a href="<%= edit_product_path(product) %>">Edit</a></li>
+						<li class="last-list-item"><a data-method="delete" href="<%= product_path(product) %>">Delete</a></li>
+					</ul>
+				</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<p class="link"><a href="<%= new_product_path %>">Create Product</a><p>
+</div>
